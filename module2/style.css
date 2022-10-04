@@ -1,0 +1,53 @@
+body
+{
+    background-image: url(../Images/Image4.jpg);
+    background-position: center ;
+    background-size: cover;
+}
+
+#my_header{
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-size: larger;
+    font-weight: bolder;
+    line-height: 2;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(217, 71, 120);
+    
+}
+
+#my_header h3{
+
+    text-transform: capitalize;
+    font-weight:600
+}
+
+nav {
+    margin: 25px;
+  }
+
+
+  nav a {
+    color: rgb(151, 138, 138);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+
+main{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: larger;
+    text-align: center;
+    font-weight:300;
+    line-height: 1.3;
+    color: rgb(217, 71, 120)
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
