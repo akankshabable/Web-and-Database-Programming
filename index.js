@@ -1,4 +1,3 @@
-// To run my server I am using the command: npm run dev
 
 const express = require('express');
 const app = express();
