@@ -12,17 +12,43 @@ router
     }
   })
 
-  .post('/note', async (req, res) => {
+  .post('/readNote', async (req, res) => {
     try {
-      let note = await Users.note(req.body);
+      let note = await Users.readNote(req.body);
       res.send({...note})
       
     } catch(err) {
       res.status(401).send({message: err.message});
     }
   })
-
-
-
+  .post('/createNote', async (req, res) => {
+    try {
+      let note = await Users.createNote(req.body);
+      res.send({...note})
+      
+    } catch(err) {
+      res.status(401).send({message: err.message});
+    }
+  })
   
+
+  .put('/edit', async (req, res) => {
+    try {
+      let note = await Users.editNote(req.body);
+      res.send({...note});
+    } catch(err) {
+      res.status(401).send({message: err.message})
+    }
+  })
+
+  .delete('/delete', async (req, res) => {
+    try {
+      Users.deleteNote(req.body);
+      res.send({success: "The note is been deleted"})
+    } catch(err) {
+      res.status(401).send({message: err.message})
+    }
+  })
+
+
 module.exports = router;
