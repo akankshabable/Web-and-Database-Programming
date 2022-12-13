@@ -1,95 +1,61 @@
+let nav = document.querySelector('nav');
 
-class User {
-    constructor(fname, lname, email, pwd) {
-      this.userFirstName = fname;
-      this.userLastName = lname;
-      this.userEmailId = email;
-      this.userPassword = pwd;
-      
-    }
-    //get methods
-    getUserFirstName() {
-      return this.userFirstName;
-    }
-    getUserLastName() {
-      return this.userLastName;
-    }
-    getUserEmailId() {
-        return this.userEmailId;
-    }
-    getUserPassword() {
-      return this.userPassword;
-    }
-
-    //set methods
-    setUserFirstName(fname) {
-      this.userFirstName = fname;
-    }
-    setUserLastName(lname) {
-      this.userLastName = lname;
-    }
-    setUserEmailId(email) {
-        this.userEmailId = email;
-    }
-    setUserPassword(pwd) {
-      
-        this.userPassword = pwd;
-      
-    }
-   
-  }
-  
-  
-
-  function registration(e)  
-  {
-    e.preventDefault();
-    let fname = document.getElementById("fname").value;
-    let lname = document.getElementById("lname").value;
-    let email = document.getElementById("email").value;
-    let pwd   = document.getElementById("pwd").value;
-    
-
-    
-    let user1 = new User(fname,lname,email,pwd);
-    console.log(user1)
-  }
-
-function loginfun(e)  
-  {
-    e.preventDefault();
-   
-    let email = document.getElementById("email").value;
-    let pwd   = document.getElementById("pwd").value;
-   
-
-    
-    let user2 = new User(email,pwd);
-    console.log(user2)
-
-
-    
+if(getCurrentUser()) {
+  nav.innerHTML = `
+    <ul>
+    <li><a href="note.html">Write Note</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a id="logout-btn">Logout</a></li>
+    </ul>
+  `
+} else {
+  nav.innerHTML = `
+    <ul>
+    li><a href="note.html">Write Note</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="register.html">Sign Up</a></li>
+    </ul>
+  `
 }
 
+// Fetch method implementation:
+export async function fetchData(route = '', data = {}, methodType) {
+  const response = await fetch(`http://localhost:3000${route}`, {
+    method: methodType, // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  if(response.ok) {
+    return await response.json(); // parses JSON response into native JavaScript objects
+  } else {
+    throw await response.json();
+  }
+} 
 
-//grab login form add event l
- 
- 
+// logout event listener
+let logout = document.getElementById("logout-btn");
+if(logout) logout.addEventListener('click', removeCurrentUser)
 
- 
-  let form = document.getElementById("register")
-  if(form) form.addEventListener('submit', registration);
-  
-  let form1 = document.getElementById("login")
-  if(form1)   form1.addEventListener('submit', loginfun);
+// stateful mechanism for user
+// logging in a user
+export function setCurrentUser(user) {
+  localStorage.setItem('user', JSON.stringify(user));
+}
 
+// getting current user function
+export function getCurrentUser() {
+  return JSON.parse(localStorage.getItem('user'));
+}
 
- // getUsers button 
-document.getElementById("btn-users").addEventListener('click', getUsers);
-
-function getUsers() {
- fetch("http://localhost:3000/users/")
- .then((res)=> res.json())
- .then((data) => console.log(data))
- .catch((err)=> console.log(err))
+// logout function for current user
+export function removeCurrentUser() {
+  localStorage.removeItem('user');
+  window.location.href = "login.html";
 }
