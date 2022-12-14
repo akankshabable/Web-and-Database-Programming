@@ -1,27 +1,33 @@
+import { fetchData, setCurrentUser } from './main.js'
+
 class Note {
-    constructor(note) {
+    constructor(noteContent) {
     
-      this.notecreated = note;
+      this.noteContent = noteContent;
     }
     //get methods
    getNoteCreated(){
-      return this.notecreated;
+      return this.noteContent;
     }
     //set methods
     
-    setNoteCreated(note) {
-      this.notecreated = note;
+
+    setNoteCreated(noteContent) {
+      this.noteContent = noteContent;
     }
   }
-  function note1(e)  
+  let form = document.getElementById("note")
+  if(form) form.addEventListener('submit', note);
+
+  function note(e)  
   {
     e.preventDefault();
    
-    let note  = document.getElementById("note")[0].value;
+    let noteContent  = document.getElementById("notecontents").value;
 
-    let note1 = new Note(note);
-    console.log(note1)
-    fetchData("/notes/createNote", user, "POST")
+    let note = new Note(noteContent);
+    //console.log(note)
+    fetchData("/notes/createNote/", note, "POST")
     .then((data) => {
       setCurrentUser(data);
       window.location.href = "login.html";
@@ -33,9 +39,7 @@ class Note {
   }
 
 //grab note form add event listener
- let form = document.getElementById("note")
-  if(form) form.addEventListener('submit', note1);
-
+ 
 //   // getNotes button 
 
 // document.getElementById("btn-notes").addEventListener('click', getNotes);

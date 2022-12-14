@@ -11,10 +11,10 @@ async function createTable() {
   await con.query(sql);
 }
 createTable();
-  async function getAllNotes() {
-    const sql = `SELECT * FROM notes;`;
-    let notes = await con.query(sql);
-    console.log(notes)
+  async function getAllNotes(user) {
+    const sql = `SELECT * FROM notes WHERE userID = ${user.userID};`;
+    return await con.query(sql);
+    
   }
   
   // Create  Note
@@ -29,11 +29,11 @@ createTable();
   
   // Read Note 
   async function readNote(note) { 
-    let cNote = await getNote(note); 
+    let cNote = await getAllNotes(note); 
     
-    if(!cNote[0]) throw Error("Note not found");
+    if(!cNote) throw Error("Note not found");
     
-return cNote[0];
+return cNote;
   }
   
   //Edit Note based on noteID
