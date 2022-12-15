@@ -11,8 +11,10 @@ async function createTable() {
   await con.query(sql);
 }
 createTable();
-  async function getAllNotes(user) {
-    const sql = `SELECT * FROM notes WHERE userID = ${user.userID};`;
+
+
+  async function getAllNotes() {
+    const sql = `SELECT * FROM notes;`;
     return await con.query(sql);
     
   }

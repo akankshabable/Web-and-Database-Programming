@@ -1,4 +1,4 @@
-import { fetchData, setCurrentUser } from './main.js'
+import { fetchData, getCurrentUser, setCurrentUser } from './main.js'
 
 class Note {
     constructor(noteContent) {
@@ -27,10 +27,11 @@ class Note {
 
     let note = new Note(noteContent);
     //console.log(note)
-    fetchData("/notes/createNote/", note, "POST")
+    var ff = getCurrentUser();
+    fetchData("/notes/createNote/", ff, "POST")
     .then((data) => {
       setCurrentUser(data);
-      window.location.href = "login.html";
+      window.location.href = "note.html";
     })
     .catch((err) =>{
       let p = document.querySelector('.error');
