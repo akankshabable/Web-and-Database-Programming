@@ -12,6 +12,7 @@ async function createTable() {
 }
 createTable();
 
+
   
   // Create  Note
   async function createNote(note) {
