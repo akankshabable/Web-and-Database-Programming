@@ -33,16 +33,16 @@ class Note {
    
     let noteContent  = document.getElementById("noteContent").value;
     let note = new Note(noteContent);
-    let note_ = note.noteContent;
-    let user_ = user1.userID;
-    let data1 = {user_, note_}
-    console.log(note_)
+    // let note_ = note.noteContent;
+    // let user_ = user1.userID;
+    // let data1 = {user_, note_}
+    console.log(note)
     console.log(user1)
     // note_data = {user1, note}
     //console.log(note)
     
-    fetchData("/notes/createNote", data1, "POST")
-    .then((data1) => {
+    fetchData("/notes/createNote", note, "POST")
+    .then((data) => {getCurrentUser();
       window.location.href = "login.html";
     })
     .catch((err) =>{

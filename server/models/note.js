@@ -11,8 +11,6 @@ async function createTable() {
   await con.query(sql);
 }
 createTable();
-
-
   
   // Create  Note
   async function createNote(note) {
