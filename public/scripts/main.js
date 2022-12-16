@@ -1,5 +1,6 @@
 let nav = document.querySelector('nav');
 
+/*
 if(getCurrentUser()) {
   nav.innerHTML = `
     <ul>
@@ -17,6 +18,7 @@ if(getCurrentUser()) {
     </ul>
   `
 }
+*/
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
@@ -51,6 +53,7 @@ export function setCurrentUser(user) {
 
 // getting current user function
 export function getCurrentUser() {
+  console.log(localStorage.getItem('user'))
   return JSON.parse(localStorage.getItem('user'));
 }
 
@@ -59,4 +62,21 @@ export function removeCurrentUser() {
   localStorage.removeItem('user');
   window.location.href = "login.html";
 }
+
+
+
+
+
+// logout event listener
+
+
+// stateful mechanism for user
+// logging in a user
+// export function setCurrentNote(note) {
+//   localStorage.setItem('note', JSON.stringify(note));
+// }
+
+
+
+
 

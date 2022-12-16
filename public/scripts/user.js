@@ -6,7 +6,6 @@ class User {
       this.userLastName = userLastName;
       this.userName = userName;
       this.password = password;
-      
     }
     
     //get methods
@@ -62,9 +61,6 @@ function login(e)
       let p = document.querySelector('.error');
       p.innerHTML = err.message;
     }) 
-
-
-    
 }
 
 

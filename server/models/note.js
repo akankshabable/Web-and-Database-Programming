@@ -12,26 +12,21 @@ async function createTable() {
 }
 createTable();
 
-
-  async function getAllNotes() {
-    const sql = `SELECT * FROM notes;`;
-    return await con.query(sql);
-    
-  }
   
   // Create  Note
   async function createNote(note) {
-   
+    console.log("line 18",note)
     const sql = `INSERT INTO notes (noteContent,userID)
       VALUES ("${note.noteContent}",${note.userID})
     `
     await con.query(sql);
-  return await readNote(note);
+    return await getNote(user);
+  //return await readNote(note);
   }
   
   // Read Note 
   async function readNote(note) { 
-    let cNote = await getAllNotes(note); 
+    let cNote = await getNote(note); 
     
     if(!cNote) throw Error("Note not found");
     
@@ -61,15 +56,26 @@ return cNote;
   // Useful Functions
   async function getNote(note) {
     let sql;
-    
-    sql = `
+    if(note.userID) {
+      sql = `
         SELECT * FROM notes
-         WHERE noteID = ${note.noteID}
-      `
-       return await con.query(sql);  
+         WHERE userID = "${note.userID}"
+      `;
+    } else {
+      sql = `
+      SELECT * FROM notes 
+        WHERE noteID = "${note.noteID}"
+    `;
+    }
+    return await con.query(sql);  
   }
 
-  module.exports = { getAllNotes, readNote, createNote,editNote,deleteNote};
+  async function getAllNotes() {
+    const sql = `SELECT * FROM notes;`;
+    return await con.query(sql);
+  }
+
+  module.exports = { getAllNotes, readNote, createNote,editNote,deleteNote, getNote};
  
 
   

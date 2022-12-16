@@ -12,6 +12,16 @@ router
     }
   })
 
+  .post('/createNote', async (req, res) => {
+    try {
+      let note = await Note.createNote(req.body);
+      res.send({...note})
+      
+    } catch(err) {
+      res.status(401).send({message: err.message});
+    }
+  })  
+
   .post('/readNote', async (req, res) => {
     try {
       let note = await Note.readNote(req.body);
@@ -21,15 +31,7 @@ router
       res.status(401).send({message: err.message});
     }
   })
-  .post('/createNote', async (req, res) => {
-    try {
-      let note = await Note.createNote(req.body);
-      res.send({...note})
-      
-    } catch(err) {
-      res.status(401).send({message: err.message});
-    }
-  })
+  
   
   
 
