@@ -22,7 +22,7 @@ class Note {
   console.log(user1)
   // fetchData("/notes/getNotes", user1, "POST")
   
-  console.log(user1);
+  //console.log(user1);
   
   let userID = user1.userID; 
   console.log(userID);
@@ -33,16 +33,16 @@ class Note {
    
     let noteContent  = document.getElementById("noteContent").value;
     let note = new Note(noteContent);
-    let note_ = note.noteContent;
-    let user_ = user1.userID;
-    let data1 = {user_, note_}
-    console.log(note_)
-    console.log(user1)
-    console.log(data1)
+    // let note_ = note.noteContent;
+    // let user_ = user1.userID;
+    // let data1 = {user_, note_}
+    // console.log(note_)
+    // console.log(user1)
+    // console.log(data1)
     // note_data = {user1, note}
     //console.log(note)
     
-    fetchData("/notes/createNote", data1, "POST")
+    fetchData("/notes/createNote", user1, "POST")
     .then((data1) => {
       window.location.href = "login.html";
     })
@@ -56,11 +56,11 @@ class Note {
 
 //   // getNotes button 
 
-// document.getElementById("btn-notes").addEventListener('click', getNotes);
-// function getNotes() {
-//   fetch("http://localhost:3000/notes/")
-//   .then((res)=> res.json())
-//   .then((data) => console.log(data))
-//   .catch((err)=> console.log(err))
-//   }
+ document.getElementById("btn-notes").addEventListener('click', getNotes);
+ function getNotes() {
+ fetch("http://localhost:3000/notes/")
+ .then((res)=> res.json())
+ .then((data) => console.log(data))
+ .catch((err)=> console.log(err))
+}
 

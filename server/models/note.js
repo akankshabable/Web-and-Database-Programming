@@ -14,12 +14,12 @@ createTable();
   
   // Create  Note
   async function createNote(note) {
-    console.log("line 18",note)
+    //console.log("line 18",note)
     const sql = `INSERT INTO notes (noteContent,userID)
       VALUES ("${note.noteContent}",${note.userID})
     `
     await con.query(sql);
-    return await getNote(user);
+    return await readNote(note);
   //return await readNote(note);
   }
   
@@ -63,7 +63,7 @@ return cNote;
     } else {
       sql = `
       SELECT * FROM notes 
-        WHERE noteID = "${note.noteID}"
+        WHERE userID = "${note.userID}"
     `;
     }
     return await con.query(sql);  
@@ -74,7 +74,7 @@ return cNote;
     return await con.query(sql);
   }
 
-  module.exports = { getAllNotes, readNote, createNote,editNote,deleteNote, getNote};
+  module.exports = { getAllNotes, readNote, createNote,editNote,deleteNote};
  
 
   
