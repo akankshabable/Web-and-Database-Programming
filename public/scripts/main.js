@@ -1,5 +1,29 @@
 let nav = document.querySelector('nav');
 
+
+
+if(getCurrentUser()) {
+  nav.innerHTML = `
+    <ul>
+    
+    <li><a href="profile.html">Profile</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a id="logout-btn">Logout</a></li>
+    
+    </ul>
+  `
+} else {
+  nav.innerHTML = `
+    <ul>
+      
+      <li><a href="login.html">Login</a></li>
+      
+      <li><a href="register.html">Sign Up</a></li>
+      
+    </ul>
+  `
+}
+
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
   const response = await fetch(`http://localhost:3000${route}`, {

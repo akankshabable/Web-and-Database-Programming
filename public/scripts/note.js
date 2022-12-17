@@ -36,8 +36,27 @@ function login(e) {
   }) 
 }
 
-
 /*
+
+let displayBtn = document.getElementById("btn-notes");
+  if(displayBtn) displayBtn.addEventListener('click', displayNote);
+  
+  function displayNote() {
+  
+    let user = getCurrentUser();
+    console.log(user)
+    
+      fetchData("/notes/readNote", user, "PUT")
+      .then((data) => {
+        removeCurrentUser();
+      })
+      .catch((err) => {
+        let p = document.querySelector('.error');
+        p.innerHTML = err.message;
+      })
+    } 
+  */
+    /*
 async function getAllNotes() {
   const sql = `SELECT * FROM notes;`;
   let notes = await con.query(sql);
