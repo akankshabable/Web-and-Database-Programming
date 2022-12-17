@@ -82,7 +82,7 @@ function login(e)
     fetchData("/users/register", user, "POST")
     .then((data) => {
       setCurrentUser(data);
-      window.location.href = "login.html";
+      window.location.href = "note.html";
     })
     .catch((err) =>{
       let p = document.querySelector('.error');

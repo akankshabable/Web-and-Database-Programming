@@ -14,7 +14,7 @@ createTable();
   
   // Create  Note
   async function createNote(note) {
-    //console.log("line 18",note)
+    console.log("line 18",note)
     const sql = `INSERT INTO notes (noteContent,userID)
       VALUES ("${note.noteContent}",${note.userID})
     `
@@ -55,17 +55,12 @@ return cNote;
   // Useful Functions
   async function getNote(note) {
     let sql;
-    if(note.userID) {
+    {
       sql = `
         SELECT * FROM notes
          WHERE userID = "${note.userID}"
       `;
-    } else {
-      sql = `
-      SELECT * FROM notes 
-        WHERE userID = "${note.userID}"
-    `;
-    }
+    } 
     return await con.query(sql);  
   }
 

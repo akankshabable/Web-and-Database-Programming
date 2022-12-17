@@ -1,38 +1,41 @@
 import { fetchData, getCurrentUser} from './main.js'
 
 class Note {
-    constructor(noteContent) {
+    constructor(noteContent, userID) {
       this.noteContent = noteContent;
+      this.userID = userID;
     }
     //get methods
-   getNoteCreated(){
-      return this.noteContent;
-    }
+  //  getNoteCreated(){
+  //     return this.noteContent;
+  //   }
     //set methods
 
-    setNoteCreated(noteContent) {
-      this.noteContent = noteContent;
-    }
+    // setNoteCreated(noteContent) {
+    //   this.noteContent = noteContent;
+    // }
   }
 
   let form = document.getElementById("note")
   if(form) form.addEventListener('submit', note);
 
-  let user1 = getCurrentUser(); 
-  console.log(user1)
+  let user = getCurrentUser(); 
+  console.log(user)
   // fetchData("/notes/getNotes", user1, "POST")
   
   //console.log(user1);
   
-  let userID = user1.userID; 
-  console.log(userID);
+  // let userID = user1.userID; 
+  // console.log(userID);
 
   function note(e)  
   {
     e.preventDefault();
-   
+    // let userID =  user;
+    let user_id = user.userID;
+    console.log(user_id)
     let noteContent  = document.getElementById("noteContent").value;
-    let note = new Note(noteContent);
+    let note_1 = new Note(noteContent, user_id);
     // let note_ = note.noteContent;
     // let user_ = user1.userID;
     // let data1 = {user_, note_}
@@ -42,9 +45,9 @@ class Note {
     // note_data = {user1, note}
     //console.log(note)
     
-    fetchData("/notes/createNote", user1, "POST")
+    fetchData("/notes/createNote", note_1, "POST")
     .then((data1) => {
-      window.location.href = "login.html";
+      window.location.href = "note.html";
     })
     .catch((err) =>{
       let p = document.querySelector('.error');
