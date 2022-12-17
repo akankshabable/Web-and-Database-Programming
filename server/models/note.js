@@ -14,12 +14,12 @@ createTable();
   
   // Create  Note
   async function createNote(note) {
-    console.log("line 18",note)
+   // console.log("line 18",note)
     const sql = `INSERT INTO notes (noteContent,userID)
       VALUES ("${note.noteContent}",${note.userID})
     `
     await con.query(sql);
-    return await readNote(note);
+    return await getNote(note);
   //return await readNote(note);
   }
   

@@ -1,69 +1,59 @@
-import { fetchData, getCurrentUser} from './main.js'
+import { fetchData, getCurrentUser } from './main.js'
 
+// user class
 class Note {
-    constructor(noteContent, userID) {
-      this.noteContent = noteContent;
-      this.userID = userID;
-    }
-    //get methods
-  //  getNoteCreated(){
-  //     return this.noteContent;
-  //   }
-    //set methods
-
-    // setNoteCreated(noteContent) {
-    //   this.noteContent = noteContent;
-    // }
+  constructor(noteContent, userID) {
+    this.noteContent = noteContent;
+    this.userID = userID;
   }
-
-  let form = document.getElementById("note")
-  if(form) form.addEventListener('submit', note);
-
-  let user = getCurrentUser(); 
-  console.log(user)
-  // fetchData("/notes/getNotes", user1, "POST")
-  
-  //console.log(user1);
-  
-  // let userID = user1.userID; 
-  // console.log(userID);
-
-  function note(e)  
-  {
-    e.preventDefault();
-    // let userID =  user;
-    let user_id = user.userID;
-    console.log(user_id)
-    let noteContent  = document.getElementById("noteContent").value;
-    let note_1 = new Note(noteContent, user_id);
-    // let note_ = note.noteContent;
-    // let user_ = user1.userID;
-    // let data1 = {user_, note_}
-    // console.log(note_)
-    // console.log(user1)
-    // console.log(data1)
-    // note_data = {user1, note}
-    //console.log(note)
-    
-    fetchData("/notes/createNote", note_1, "POST")
-    .then((data1) => {
-      window.location.href = "note.html";
-    })
-    .catch((err) =>{
-      let p = document.querySelector('.error');
-      p.innerHTML = err.message;
-    })
-  }
-
-//grab note form add event listener
-
-//   // getNotes button 
-
- document.getElementById("btn-notes").addEventListener('click', getNotes);
- function getNotes() {
- fetch("http://localhost:3000/notes/")
- .then((res)=> res.json())
- .then((data) => console.log(data))
- .catch((err)=> console.log(err))
 }
 
+// login functionality
+let loginf = document.getElementById("note");
+if(loginf) loginf.addEventListener('submit', login);
+
+let user1 = getCurrentUser();
+console.log(user1)
+
+
+function login(e) {
+  e.preventDefault();
+
+  let userID = user1.userID;
+  console.log(userID)
+  let noteContent = document.getElementById("noteContent").value;
+  let note = new Note(noteContent, userID);
+  console.log(note)
+ 
+
+  fetchData("/notes/createNote", note, "POST")
+  .then((note) => {
+    window.location.href = "note.html"
+  })
+  .catch((err) => {
+    let p = document.querySelector('.error');
+    p.innerHTML = err.message;
+  }) 
+}
+
+
+/*
+async function getAllNotes() {
+  const sql = `SELECT * FROM notes;`;
+  let notes = await con.query(sql);
+  console.log(notes)
+}
+let all_notes = document.getElementById("btn-notes");
+if(all_notes) all_notes.addEventListener('submit', get_all_notes);
+function get_all_notes(e) {
+  e.preventDefault();
+  fetchData("/notes/", data1, "GET")
+  .then((data1) => {
+    window.location.replace = "note.html"
+  })
+  .catch((err) => {
+    let p = document.querySelector('.error');
+    p.innerHTML = err.message;
+  }) 
+}
+*/
