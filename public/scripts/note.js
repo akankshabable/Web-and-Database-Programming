@@ -38,6 +38,7 @@ class Note {
     let data1 = {user_, note_}
     console.log(note_)
     console.log(user1)
+    console.log(data1)
     // note_data = {user1, note}
     //console.log(note)
     
