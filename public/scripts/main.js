@@ -65,3 +65,12 @@ export function removeCurrentUser() {
   localStorage.removeItem('user');
   window.location.href = "login.html";
 }
+
+export function setCurrentNote(note) {
+  localStorage.setItem('note', JSON.stringify(note));
+}
+
+// getting current user function
+export function getCurrentNote() {
+  return JSON.parse(localStorage.getItem('note'));
+}

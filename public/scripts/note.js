@@ -1,4 +1,4 @@
-import { fetchData, getCurrentUser } from './main.js'
+import { fetchData, getCurrentUser,setCurrentNote,getCurrentNote } from './main.js'
 
 // user class
 class Note {
@@ -27,7 +27,8 @@ function login(e) {
  
 
   fetchData("/notes/createNote", note, "POST")
-  .then((note) => {
+  .then((data) => {
+    setCurrentNote(data);
     window.location.href = "note.html"
   })
   .catch((err) => {
@@ -36,26 +37,26 @@ function login(e) {
   }) 
 }
 
-/*
+
 
 let displayBtn = document.getElementById("btn-notes");
   if(displayBtn) displayBtn.addEventListener('click', displayNote);
   
-  function displayNote() {
-  
-    let user = getCurrentUser();
+  function displayNote(e) {
+    e.preventDefault();
+    let user = getCurrentNote();
     console.log(user)
+
+    let userID=user.userID;
     
-      fetchData("/notes/readNote", user, "PUT")
-      .then((data) => {
-        removeCurrentUser();
-      })
+      fetchData("/notes/readNote", userID, "POST")
+      .then()
       .catch((err) => {
         let p = document.querySelector('.error');
         p.innerHTML = err.message;
       })
     } 
-  */
+  
     /*
 async function getAllNotes() {
   const sql = `SELECT * FROM notes;`;
